@@ -24,6 +24,10 @@ config/name="TophatMoth Project Management System 2"
 config/features=PackedStringArray("4.0", "Mobile")
 config/icon="res://icon.svg"
 
+[display]
+
+window/stretch/aspect="expand"
+
 [rendering]
 
 renderer/rendering_method="mobile"

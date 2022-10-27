@@ -1,0 +1,89 @@
+[gd_scene load_steps=5 format=3 uid="uid://q8kaiiccfjqh"]
+
+[ext_resource type="Texture2D" uid="uid://bgt6kxwsex4wb" path="res://Background.png" id="1_231p4"]
+[ext_resource type="PackedScene" uid="uid://dg47axgtxy67i" path="res://FileObjects/BaseFileObject.tscn" id="2_g7pos"]
+
+[sub_resource type="GDScript" id="GDScript_6qfl3"]
+script/source = "extends ParallaxLayer
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	var max_dim : Vector2i = DisplayServer.screen_get_size(-1);
+	
+	for i in range(DisplayServer.get_screen_count()):
+		for j in range(2):
+			max_dim[j] = max(max_dim[j], DisplayServer.screen_get_size(i)[j]);
+	
+	for i in range(2):
+		@warning_ignore(integer_division)
+		max_dim[i] = max_dim[i] / 64;
+		max_dim[i] = max_dim[i] * 64;
+	
+	motion_mirroring = max_dim;
+	$TextureRect.set_size(max_dim);
+"
+
+[sub_resource type="GDScript" id="GDScript_qnhw8"]
+script/source = "extends ParallaxLayer
+
+@export_enum(\"X\", \"Y\") var axis : int = 0;
+@export var line_width : float = 4.0;
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	var max_dim : Vector2i = DisplayServer.screen_get_size(-1);
+	
+	for i in range(DisplayServer.get_screen_count()):
+		max_dim[axis] = max(max_dim[axis], DisplayServer.screen_get_size(i)[axis]);
+	
+	@warning_ignore(narrowing_conversion)
+	max_dim[1 - axis] = line_width;
+	
+	motion_mirroring[axis] = max_dim[axis];
+	$ColorRect.set_size(max_dim);
+	var color_rect_position : Vector2 = Vector2(0.0, 0.0);
+	color_rect_position[1 - axis] = -line_width / 2.0;
+	$ColorRect._set_position(color_rect_position);
+"
+
+[node name="ProjectController" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="GridBG" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1280, 768)
+script = SubResource("GDScript_6qfl3")
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/GridBG"]
+offset_right = 1280.0
+offset_bottom = 768.0
+texture = ExtResource("1_231p4")
+stretch_mode = 1
+
+[node name="X Axis" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1280, 0)
+script = SubResource("GDScript_qnhw8")
+
+[node name="ColorRect" type="ColorRect" parent="ParallaxBackground/X Axis"]
+offset_top = -2.0
+offset_right = 1280.0
+offset_bottom = 2.0
+color = Color(0.533333, 0.117647, 0.117647, 1)
+
+[node name="Y Axis" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(0, 720)
+script = SubResource("GDScript_qnhw8")
+axis = 1
+
+[node name="ColorRect" type="ColorRect" parent="ParallaxBackground/Y Axis"]
+offset_left = -2.0
+offset_right = 2.0
+offset_bottom = 720.0
+color = Color(0.192157, 0.533333, 0.117647, 1)
+
+[node name="FileObjects" type="Node" parent="."]
+
+[node name="FileObject" parent="FileObjects" instance=ExtResource("2_g7pos")]
