@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://q8kaiiccfjqh"]
+[gd_scene load_steps=9 format=3 uid="uid://q8kaiiccfjqh"]
 
 [ext_resource type="Script" path="res://ProjectController.gd" id="1_7xskc"]
 [ext_resource type="Texture2D" uid="uid://bgt6kxwsex4wb" path="res://Background.png" id="1_231p4"]
 [ext_resource type="PackedScene" uid="uid://dg47axgtxy67i" path="res://FileObjects/BaseFileObject.tscn" id="2_g7pos"]
+[ext_resource type="PackedScene" uid="uid://dasy13nxsbcjj" path="res://FileObjects/ImageFileObject.tscn" id="4_77fss"]
+[ext_resource type="PackedScene" uid="uid://o5ukkjsjkqge" path="res://FileObjects/TextFileObject.tscn" id="5_skgah"]
+[ext_resource type="PackedScene" uid="uid://cantxupniv33a" path="res://FileObjects/FolderFileObject.tscn" id="6_l58vb"]
 
 [sub_resource type="GDScript" id="GDScript_6qfl3"]
 script/source = "extends ParallaxLayer
@@ -89,3 +92,15 @@ color = Color(0.192157, 0.533333, 0.117647, 1)
 [node name="FileObjects" type="Node" parent="."]
 
 [node name="FileObject" parent="FileObjects" instance=ExtResource("2_g7pos")]
+
+[node name="FileObject2" parent="FileObjects" instance=ExtResource("4_77fss")]
+position = Vector2i(150, 0)
+global_position = Vector2(150, 0)
+
+[node name="FileObject3" parent="FileObjects" instance=ExtResource("5_skgah")]
+position = Vector2i(0, 150)
+global_position = Vector2(0, 150)
+
+[node name="FileObject4" parent="FileObjects" instance=ExtResource("6_l58vb")]
+position = Vector2i(150, 150)
+global_position = Vector2(150, 150)

@@ -15,6 +15,8 @@ func _ready():
 
 func update_position():
 	var camera : Camera2D = get_tree().root.get_camera_2d();
+	if camera == null:
+		return;
 	# Might be wrong by a pixel if screen size is odd, but it doen't matter
 	var top_left : Vector2i = Vector2i(camera.position) - (get_tree().root.size / 2);
 	position = Vector2i(global_position) - top_left;
