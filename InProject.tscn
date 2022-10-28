@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://q8kaiiccfjqh"]
+[gd_scene load_steps=6 format=3 uid="uid://q8kaiiccfjqh"]
 
+[ext_resource type="Script" path="res://ProjectController.gd" id="1_7xskc"]
 [ext_resource type="Texture2D" uid="uid://bgt6kxwsex4wb" path="res://Background.png" id="1_231p4"]
 [ext_resource type="PackedScene" uid="uid://dg47axgtxy67i" path="res://FileObjects/BaseFileObject.tscn" id="2_g7pos"]
 
@@ -47,6 +48,7 @@ func _ready():
 "
 
 [node name="ProjectController" type="Node2D"]
+script = ExtResource("1_7xskc")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
