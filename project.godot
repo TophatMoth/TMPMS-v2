@@ -29,7 +29,7 @@ _global_script_class_icons={
 config/name="TophatMoth Project Management System 2"
 run/main_scene="res://InProject.tscn"
 config/features=PackedStringArray("4.0", "Mobile")
-config/icon="res://icon.svg"
+config/icon="res://ButtonIcons/Center.png"
 
 [autoload]
 
