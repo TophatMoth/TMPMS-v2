@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://q8kaiiccfjqh"]
+[gd_scene load_steps=10 format=3 uid="uid://q8kaiiccfjqh"]
 
 [ext_resource type="Script" path="res://ProjectController.gd" id="1_7xskc"]
 [ext_resource type="Script" path="res://MainCamera.gd" id="2_6aecc"]
@@ -10,6 +10,13 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_bpskw"]
 font_size = 24
+
+[sub_resource type="GDScript" id="GDScript_syp4w"]
+script/source = "extends Node
+
+func _ready():
+	Global.file_obj_container = self;
+"
 
 [node name="ProjectController" type="Node2D"]
 script = ExtResource("1_7xskc")
@@ -45,6 +52,7 @@ vertical_alignment = 2
 [node name="Grid" parent="." instance=ExtResource("2_ccm7a")]
 
 [node name="FileObjects" type="Node" parent="."]
+script = SubResource("GDScript_syp4w")
 
 [node name="FileObject" parent="FileObjects" instance=ExtResource("2_g7pos")]
 
