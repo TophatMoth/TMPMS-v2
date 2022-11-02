@@ -33,6 +33,7 @@ font_size = 24
 script = ExtResource("1_qeb1a")
 
 [node name="TopBar" type="Window" parent="."]
+disable_3d = true
 size = Vector2i(1280, 72)
 unresizable = true
 borderless = true
@@ -49,6 +50,7 @@ grow_vertical = 2
 color = Color(0.145098, 0.145098, 0.164706, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="TopBar/Top Bar"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -60,6 +62,7 @@ theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TopBar/Top Bar/MarginContainer"]
+layout_mode = 2
 offset_left = 4.0
 offset_top = 4.0
 offset_right = 1276.0
@@ -69,6 +72,7 @@ grow_vertical = 2
 
 [node name="HomeButton" type="Button" parent="TopBar/Top Bar/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2i(64, 64)
+layout_mode = 2
 offset_right = 64.0
 offset_bottom = 712.0
 tooltip_text = "Go to the project's home folder"
@@ -78,6 +82,7 @@ icon_alignment = 1
 
 [node name="UpFolderButton" type="Button" parent="TopBar/Top Bar/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2i(64, 64)
+layout_mode = 2
 offset_left = 68.0
 offset_right = 132.0
 offset_bottom = 712.0
@@ -88,6 +93,7 @@ icon_alignment = 1
 
 [node name="CenterButton" type="Button" parent="TopBar/Top Bar/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2i(64, 64)
+layout_mode = 2
 offset_left = 136.0
 offset_right = 200.0
 offset_bottom = 712.0
@@ -98,6 +104,7 @@ icon_alignment = 1
 
 [node name="CenterFilesButton" type="Button" parent="TopBar/Top Bar/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2i(64, 64)
+layout_mode = 2
 offset_left = 204.0
 offset_right = 268.0
 offset_bottom = 712.0
@@ -107,6 +114,7 @@ icon = ExtResource("4_n1mjh")
 icon_alignment = 1
 
 [node name="Label" type="Label" parent="TopBar/Top Bar/MarginContainer/HBoxContainer"]
+layout_mode = 2
 offset_left = 272.0
 offset_right = 1136.0
 offset_bottom = 712.0
@@ -119,6 +127,7 @@ clip_text = true
 
 [node name="SaveButton" type="Button" parent="TopBar/Top Bar/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2i(64, 64)
+layout_mode = 2
 offset_left = 1140.0
 offset_right = 1204.0
 offset_bottom = 712.0
@@ -128,6 +137,7 @@ icon_alignment = 1
 
 [node name="CloseButton" type="Button" parent="TopBar/Top Bar/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2i(64, 64)
+layout_mode = 2
 offset_left = 1208.0
 offset_right = 1272.0
 offset_bottom = 712.0
@@ -136,6 +146,7 @@ icon = ExtResource("6_2wdyd")
 icon_alignment = 1
 
 [node name="SideBar" type="Window" parent="."]
+disable_3d = true
 position = Vector2i(0, 72)
 size = Vector2i(72, 648)
 unresizable = true
@@ -155,6 +166,7 @@ grow_vertical = 2
 color = Color(0.211765, 0.211765, 0.239216, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="SideBar/Side Bar"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -166,6 +178,7 @@ theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
 [node name="VBoxContainer" type="VBoxContainer" parent="SideBar/Side Bar/MarginContainer"]
+layout_mode = 2
 offset_left = 4.0
 offset_top = 4.0
 offset_right = 1276.0
@@ -175,6 +188,7 @@ grow_vertical = 2
 
 [node name="TextboxButton" type="Button" parent="SideBar/Side Bar/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2i(64, 64)
+layout_mode = 2
 offset_right = 1272.0
 offset_bottom = 64.0
 tooltip_text = "Add a textbox"
@@ -184,6 +198,7 @@ icon_alignment = 1
 
 [node name="FolderButton" type="Button" parent="SideBar/Side Bar/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2i(64, 64)
+layout_mode = 2
 offset_top = 68.0
 offset_right = 1272.0
 offset_bottom = 132.0
@@ -194,6 +209,7 @@ icon_alignment = 1
 
 [node name="ImageButton" type="Button" parent="SideBar/Side Bar/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2i(64, 64)
+layout_mode = 2
 offset_top = 136.0
 offset_right = 1272.0
 offset_bottom = 200.0
@@ -213,6 +229,7 @@ theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 4
 
 [node name="CoordLabel" type="Label" parent="MarginContainer"]
+layout_mode = 2
 offset_right = 1274.0
 offset_bottom = 716.0
 grow_horizontal = 2
