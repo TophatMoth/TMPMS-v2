@@ -1,6 +1,8 @@
 extends Node2D
 class_name ProjectController
 
+@onready var ui : ProjectUI = $UI;
+
 func _on_ui_button_pressed(button_id : int):
 	match(button_id):
 		ProjectUI.HOME:

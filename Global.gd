@@ -29,9 +29,16 @@ func get_mouse_pos() -> Vector2i:
 	if get_tree().root.has_focus():
 		return Vector2i(get_tree().root.get_mouse_position());
 	
-	for child in file_obj_container.get_children():
-		if child is Window:
-			if child.has_focus():
-				return Vector2i(child.get_mouse_position()) + child.position;
+	if proj_controller != null && is_instance_valid(proj_controller):
+		for child in proj_controller.ui.get_children():
+			if child is Window:
+				if child.has_focus():
+					return Vector2i(child.get_mouse_position()) + child.position;
+	
+	if file_obj_container != null && is_instance_valid(file_obj_container):
+		for child in file_obj_container.get_children():
+			if child is Window:
+				if child.has_focus():
+					return Vector2i(child.get_mouse_position()) + child.position;
 	
 	return Vector2i.ZERO;
