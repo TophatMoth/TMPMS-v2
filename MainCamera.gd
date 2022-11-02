@@ -3,6 +3,9 @@ extends Camera2D
 @onready var previous_mouse_pos : Vector2i = Vector2i.ZERO;
 @export var coord_label : Label = null;
 
+func _ready():
+	Global.camera_moved.connect(update_label);
+
 func _process(_delta):
 	var move_vector : Vector2i = Vector2i.ZERO;
 	
@@ -14,5 +17,7 @@ func _process(_delta):
 	if move_vector != Vector2i.ZERO:
 		position += Vector2(move_vector);
 		Global.emit_camera_moved();
-		if coord_label != null:
-			coord_label.text = str(Vector2i(position));
+
+func update_label():
+	if coord_label != null:
+		coord_label.text = str(Vector2i(position));

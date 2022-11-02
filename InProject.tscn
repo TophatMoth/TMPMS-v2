@@ -5,11 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://cs5bxtio4lyn5" path="res://Grid.tscn" id="2_ccm7a"]
 [ext_resource type="PackedScene" uid="uid://dg47axgtxy67i" path="res://FileObjects/BaseFileObject.tscn" id="2_g7pos"]
 [ext_resource type="PackedScene" uid="uid://dasy13nxsbcjj" path="res://FileObjects/ImageFileObject.tscn" id="4_77fss"]
+[ext_resource type="PackedScene" uid="uid://c00ndr6p78vj5" path="res://UI.tscn" id="4_v4jb4"]
 [ext_resource type="PackedScene" uid="uid://o5ukkjsjkqge" path="res://FileObjects/TextFileObject.tscn" id="5_skgah"]
 [ext_resource type="PackedScene" uid="uid://cantxupniv33a" path="res://FileObjects/FolderFileObject.tscn" id="6_l58vb"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_bpskw"]
-font_size = 24
 
 [sub_resource type="GDScript" id="GDScript_syp4w"]
 script/source = "extends Node
@@ -24,32 +22,11 @@ script = ExtResource("1_7xskc")
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("coord_label")]
 current = true
 script = ExtResource("2_6aecc")
-coord_label = NodePath("CanvasLayer/MarginContainer/CoordLabel")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
-
-[node name="MarginContainer" type="MarginContainer" parent="Camera2D/CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_right = 6
-theme_override_constants/margin_bottom = 4
-
-[node name="CoordLabel" type="Label" parent="Camera2D/CanvasLayer/MarginContainer"]
-layout_mode = 2
-offset_right = 1274.0
-offset_bottom = 716.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 1
-text = "(0, 0)"
-label_settings = SubResource("LabelSettings_bpskw")
-horizontal_alignment = 2
-vertical_alignment = 2
+coord_label = NodePath("../UI/VBoxContainer/HBoxContainer/MarginContainer/CoordLabel")
 
 [node name="Grid" parent="." instance=ExtResource("2_ccm7a")]
+
+[node name="UI" parent="." instance=ExtResource("4_v4jb4")]
 
 [node name="FileObjects" type="Node" parent="."]
 script = SubResource("GDScript_syp4w")
@@ -64,3 +41,7 @@ position = Vector2i(0, 150)
 
 [node name="FileObject4" parent="FileObjects" instance=ExtResource("6_l58vb")]
 position = Vector2i(150, 150)
+
+[connection signal="button_pressed" from="UI" to="." method="_on_ui_button_pressed"]
+
+[editable path="UI"]

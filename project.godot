@@ -18,10 +18,16 @@ _global_script_classes=[{
 "class": &"ProjectController",
 "language": &"GDScript",
 "path": "res://ProjectController.gd"
+}, {
+"base": "CanvasLayer",
+"class": &"ProjectUI",
+"language": &"GDScript",
+"path": "res://UI.gd"
 }]
 _global_script_class_icons={
 "FileObject": "",
-"ProjectController": ""
+"ProjectController": "",
+"ProjectUI": ""
 }
 
 [application]
