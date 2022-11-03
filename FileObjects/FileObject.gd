@@ -11,6 +11,8 @@ class_name FileObject
 
 var last_local_position : Vector2i = Vector2i.ZERO;
 
+var being_held : bool = false;
+
 func _ready():
 	# Connect to its own signals
 	close_requested.connect(close_button_pressed);
@@ -23,6 +25,8 @@ func _ready():
 	update_local_position();
 
 func update_local_position():
+	if being_held:
+		return;
 	var camera : Camera2D = get_tree().root.get_camera_2d();
 	var top_left : Vector2i = Vector2i.ZERO;
 	if camera != null:
@@ -44,9 +48,15 @@ func get_lop_left(cam : Camera2D) -> Vector2i:
 
 func _process(_delta):
 	if last_local_position != position:
-		#print(String(name) + " moved");
+		if !being_held:
+			being_held = true;
+			print(String(name) + " picked up");
 		update_global_position();
 		last_local_position = position;
+	if being_held && !(Input.get_mouse_button_mask() & MOUSE_BUTTON_MASK_LEFT):
+		being_held = false;
+		Global.file_object_dropped.emit(self);
+		print(String(name) + " dropped");
 
 func close_button_pressed():
 	# Temporary, later it should have a confirmation popup and delete the associated file

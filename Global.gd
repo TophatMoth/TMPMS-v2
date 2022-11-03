@@ -1,6 +1,7 @@
 extends Node
 
 signal camera_moved;
+signal file_object_dropped(file_object);
 
 var file_obj_container : Node = null;
 var proj_controller : ProjectController = null;
