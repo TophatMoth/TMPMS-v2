@@ -14,7 +14,6 @@ grow_vertical = 2
 
 [node name="Button" type="Button" parent="VBoxContainer" index="0"]
 texture_filter = 1
-layout_mode = 2
 offset_right = 1280.0
 offset_bottom = 681.0
 grow_horizontal = 2
@@ -26,7 +25,6 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="TextEdit" type="TextEdit" parent="VBoxContainer" index="1"]
-layout_mode = 2
 offset_top = 685.0
 offset_right = 1280.0
 offset_bottom = 720.0

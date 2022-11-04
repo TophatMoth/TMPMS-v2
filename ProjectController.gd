@@ -3,6 +3,10 @@ class_name ProjectController
 
 @onready var ui : ProjectUI = $UI;
 
+@onready var textbox_scene : PackedScene = load("res://FileObjects/TextFileObject.tscn");
+@onready var folder_scene : PackedScene = load("res://FileObjects/FolderFileObject.tscn");
+@onready var image_scene : PackedScene = load("res://FileObjects/ImageFileObject.tscn");
+
 func _on_ui_button_pressed(button_id : int):
 	match(button_id):
 		ProjectUI.HOME:
@@ -19,11 +23,11 @@ func _on_ui_button_pressed(button_id : int):
 		ProjectUI.CLOSE:
 			pass;
 		ProjectUI.ADD_TEXTBOX:
-			pass;
+			spawn_file_object(textbox_scene);
 		ProjectUI.ADD_FOLDER:
-			pass;
+			spawn_file_object(folder_scene);
 		ProjectUI.ADD_IMAGE:
-			pass;
+			spawn_file_object(image_scene);
 
 func center_cam():
 	$Camera2D.position = Vector2.ZERO;
@@ -33,3 +37,9 @@ func center_files():
 	for child in $FileObjects.get_children():
 		if child is FileObject:
 			child.global_position = Vector2i.ZERO;
+
+func spawn_file_object(file_object_scene : PackedScene):
+	var new_fo := file_object_scene.instantiate();
+	$FileObjects.add_child(new_fo);
+	if new_fo is FileObject:
+		new_fo.global_position = $Camera2D.position;

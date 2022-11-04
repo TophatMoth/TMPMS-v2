@@ -1,13 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://q8kaiiccfjqh"]
+[gd_scene load_steps=6 format=3 uid="uid://q8kaiiccfjqh"]
 
 [ext_resource type="Script" path="res://ProjectController.gd" id="1_7xskc"]
 [ext_resource type="Script" path="res://MainCamera.gd" id="2_6aecc"]
 [ext_resource type="PackedScene" uid="uid://cs5bxtio4lyn5" path="res://Grid.tscn" id="2_ccm7a"]
-[ext_resource type="PackedScene" uid="uid://dg47axgtxy67i" path="res://FileObjects/BaseFileObject.tscn" id="2_g7pos"]
-[ext_resource type="PackedScene" uid="uid://dasy13nxsbcjj" path="res://FileObjects/ImageFileObject.tscn" id="4_77fss"]
 [ext_resource type="PackedScene" uid="uid://c00ndr6p78vj5" path="res://UI.tscn" id="4_v4jb4"]
-[ext_resource type="PackedScene" uid="uid://o5ukkjsjkqge" path="res://FileObjects/TextFileObject.tscn" id="5_skgah"]
-[ext_resource type="PackedScene" uid="uid://cantxupniv33a" path="res://FileObjects/FolderFileObject.tscn" id="6_l58vb"]
 
 [sub_resource type="GDScript" id="GDScript_syp4w"]
 script/source = "extends Node
@@ -30,14 +26,6 @@ coord_label = NodePath("../UI/MarginContainer/CoordLabel")
 
 [node name="FileObjects" type="Node" parent="."]
 script = SubResource("GDScript_syp4w")
-
-[node name="FileObject" parent="FileObjects" instance=ExtResource("2_g7pos")]
-
-[node name="FileObject2" parent="FileObjects" instance=ExtResource("4_77fss")]
-
-[node name="FileObject3" parent="FileObjects" instance=ExtResource("5_skgah")]
-
-[node name="FileObject4" parent="FileObjects" instance=ExtResource("6_l58vb")]
 
 [connection signal="button_pressed" from="UI" to="." method="_on_ui_button_pressed"]
 
