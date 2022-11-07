@@ -64,6 +64,7 @@ visible = false
 visible = false
 
 [node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(768, 432)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.2
@@ -365,5 +366,6 @@ script = SubResource("GDScript_7hn1t")
 text_file_path = "res://Fonts/Roboto_Mono/LICENSE.txt"
 
 [connection signal="pressed" from="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/LicenseButtons/RobotoCredits" to="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/LicenseButtons/RobotoCredits/Popup" method="popup_centered_ratio" binds= [0.5]]
+[connection signal="about_to_popup" from="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/LicenseButtons/RobotoCredits/Popup" to="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/LicenseButtons/RobotoCredits/Popup/ScrollContainer" method="set_v_scroll" binds= [0]]
 
 [editable path="Grid"]
