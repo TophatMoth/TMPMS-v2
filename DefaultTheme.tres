@@ -1,0 +1,35 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://b7dvcqdb0do4n"]
+
+[ext_resource type="FontFile" uid="uid://j58fsivvgi0c" path="res://Fonts/Roboto_Mono/static/RobotoMono-Bold.ttf" id="1_1cvq6"]
+
+[resource]
+Button/fonts/font = ExtResource("1_1cvq6")
+CheckBox/fonts/font = ExtResource("1_1cvq6")
+CheckButton/fonts/font = ExtResource("1_1cvq6")
+CodeEdit/fonts/font = ExtResource("1_1cvq6")
+ColorPickerButton/fonts/font = ExtResource("1_1cvq6")
+Fonts/fonts/large = null
+Fonts/fonts/normal = ExtResource("1_1cvq6")
+GraphNode/fonts/title_font = ExtResource("1_1cvq6")
+ItemList/fonts/font = ExtResource("1_1cvq6")
+Label/fonts/font = ExtResource("1_1cvq6")
+LineEdit/fonts/font = ExtResource("1_1cvq6")
+LinkButton/fonts/font = ExtResource("1_1cvq6")
+MenuBar/fonts/font = ExtResource("1_1cvq6")
+MenuButton/fonts/font = ExtResource("1_1cvq6")
+OptionButton/fonts/font = ExtResource("1_1cvq6")
+PopupMenu/fonts/font = ExtResource("1_1cvq6")
+PopupMenu/fonts/font_separator = null
+ProgressBar/fonts/font = ExtResource("1_1cvq6")
+RichTextLabel/fonts/bold_font = null
+RichTextLabel/fonts/bold_italics_font = null
+RichTextLabel/fonts/italics_font = null
+RichTextLabel/fonts/mono_font = null
+RichTextLabel/fonts/normal_font = null
+TabBar/fonts/font = ExtResource("1_1cvq6")
+TabContainer/fonts/font = ExtResource("1_1cvq6")
+TextEdit/fonts/font = ExtResource("1_1cvq6")
+TooltipLabel/fonts/font = ExtResource("1_1cvq6")
+Tree/fonts/font = ExtResource("1_1cvq6")
+Tree/fonts/title_button_font = ExtResource("1_1cvq6")
+Window/fonts/title_font = ExtResource("1_1cvq6")

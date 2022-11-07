@@ -4,6 +4,7 @@ extends Camera2D
 @export var coord_label : Label = null;
 
 func _ready():
+	@warning_ignore(return_value_discarded)
 	Global.camera_moved.connect(update_label);
 
 func _process(_delta):

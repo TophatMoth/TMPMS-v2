@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://b3vhpxl4k4mv3"]
+[gd_scene load_steps=8 format=3 uid="uid://b3vhpxl4k4mv3"]
 
 [ext_resource type="PackedScene" uid="uid://cs5bxtio4lyn5" path="res://Grid.tscn" id="1_4hnip"]
+[ext_resource type="Theme" uid="uid://b7dvcqdb0do4n" path="res://DefaultTheme.tres" id="1_okj61"]
 
 [sub_resource type="GDScript" id="GDScript_2annu"]
 script/source = "extends ParallaxBackground
@@ -28,6 +29,18 @@ func _pressed():
 	OS.shell_open(link);
 "
 
+[sub_resource type="GDScript" id="GDScript_7hn1t"]
+script/source = "extends Label
+
+@export_file(\"*.txt\") var text_file_path : String = \"\";
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	var text_file : FileAccess = FileAccess.open(text_file_path, FileAccess.READ);
+	text = text_file.get_as_text();
+	text_file = null;
+"
+
 [node name="ProjectSelect" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -35,6 +48,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_okj61")
 
 [node name="Grid" parent="." instance=ExtResource("1_4hnip")]
 script = SubResource("GDScript_2annu")
@@ -101,7 +115,7 @@ theme_override_constants/separation = 8
 [node name="Label" type="Label" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 offset_right = 740.0
-offset_bottom = 42.0
+offset_bottom = 41.0
 text = "TophatMoth Project Management System"
 label_settings = SubResource("LabelSettings_8e5s1")
 horizontal_alignment = 1
@@ -109,9 +123,9 @@ vertical_alignment = 1
 
 [node name="Credits" type="Label" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
-offset_top = 50.0
+offset_top = 49.0
 offset_right = 740.0
-offset_bottom = 76.0
+offset_bottom = 74.0
 size_flags_vertical = 8
 text = "By Kitty_McTophat and Procymbopteryx"
 label_settings = SubResource("LabelSettings_vxoo5")
@@ -121,7 +135,7 @@ autowrap_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
-offset_top = 84.0
+offset_top = 82.0
 offset_right = 740.0
 offset_bottom = 364.0
 size_flags_vertical = 3
@@ -129,7 +143,7 @@ size_flags_vertical = 3
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 offset_right = 368.0
-offset_bottom = 280.0
+offset_bottom = 282.0
 size_flags_horizontal = 3
 
 [node name="Button" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
@@ -156,131 +170,181 @@ text = "Load Project
 layout_mode = 2
 offset_left = 372.0
 offset_right = 740.0
-offset_bottom = 280.0
+offset_bottom = 282.0
 size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer"]
 layout_mode = 2
 offset_right = 360.0
-offset_bottom = 451.0
+offset_bottom = 438.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Button" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 offset_right = 360.0
-offset_bottom = 31.0
+offset_bottom = 30.0
 focus_mode = 0
 text = "Recent Project"
 
 [node name="Button2" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-offset_top = 35.0
+offset_top = 34.0
 offset_right = 360.0
-offset_bottom = 66.0
+offset_bottom = 64.0
 focus_mode = 0
 text = "Recent Project"
 
 [node name="Button3" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-offset_top = 70.0
+offset_top = 68.0
 offset_right = 360.0
-offset_bottom = 101.0
+offset_bottom = 98.0
 focus_mode = 0
 text = "Recent Project"
 
 [node name="Button4" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-offset_top = 105.0
+offset_top = 102.0
 offset_right = 360.0
-offset_bottom = 136.0
+offset_bottom = 132.0
 focus_mode = 0
 text = "Recent Project"
 
 [node name="Button5" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-offset_top = 140.0
+offset_top = 136.0
 offset_right = 360.0
-offset_bottom = 171.0
+offset_bottom = 166.0
 focus_mode = 0
 text = "Recent Project"
 
 [node name="Button6" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-offset_top = 175.0
+offset_top = 170.0
 offset_right = 360.0
-offset_bottom = 206.0
+offset_bottom = 200.0
 focus_mode = 0
 text = "Recent Project"
 
 [node name="Button7" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-offset_top = 210.0
+offset_top = 204.0
 offset_right = 360.0
-offset_bottom = 241.0
+offset_bottom = 234.0
 focus_mode = 0
 text = "Recent Project"
 
 [node name="Button8" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-offset_top = 245.0
+offset_top = 238.0
 offset_right = 360.0
-offset_bottom = 276.0
+offset_bottom = 268.0
 focus_mode = 0
 text = "Recent Project"
 
 [node name="Button9" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-offset_top = 280.0
+offset_top = 272.0
 offset_right = 360.0
-offset_bottom = 311.0
+offset_bottom = 302.0
 focus_mode = 0
 text = "Recent Project"
 
 [node name="Button10" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-offset_top = 315.0
+offset_top = 306.0
 offset_right = 360.0
-offset_bottom = 346.0
+offset_bottom = 336.0
 focus_mode = 0
 text = "Recent Project"
 
 [node name="Button11" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-offset_top = 350.0
+offset_top = 340.0
 offset_right = 360.0
-offset_bottom = 381.0
+offset_bottom = 370.0
 focus_mode = 0
 text = "Recent Project"
 
 [node name="Button12" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-offset_top = 385.0
+offset_top = 374.0
 offset_right = 360.0
-offset_bottom = 416.0
+offset_bottom = 404.0
 focus_mode = 0
 text = "Recent Project"
 
 [node name="Button13" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-offset_top = 420.0
+offset_top = 408.0
 offset_right = 360.0
-offset_bottom = 451.0
+offset_bottom = 438.0
 focus_mode = 0
 text = "Recent Project"
 
-[node name="GodotCredits" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer"]
+[node name="LicenseButtons" type="HBoxContainer" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+offset_top = 372.0
+offset_right = 740.0
+offset_bottom = 404.0
+
+[node name="GodotCredits" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/LicenseButtons"]
 custom_minimum_size = Vector2(250, 32)
 layout_mode = 2
-offset_left = 245.0
-offset_top = 372.0
-offset_right = 495.0
-offset_bottom = 404.0
-size_flags_horizontal = 4
+offset_left = 55.0
+offset_right = 313.0
+offset_bottom = 32.0
+size_flags_horizontal = 6
 size_flags_vertical = 8
 focus_mode = 0
 text = "Made with the Godot Engine"
 script = SubResource("GDScript_5kcot")
 link = "https://godotengine.org/license"
+
+[node name="RobotoCredits" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/LicenseButtons"]
+custom_minimum_size = Vector2(250, 32)
+layout_mode = 2
+offset_left = 417.0
+offset_right = 695.0
+offset_bottom = 32.0
+size_flags_horizontal = 6
+size_flags_vertical = 8
+focus_mode = 0
+text = "Using the Roboto Font Family"
+
+[node name="Popup" type="Popup" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/LicenseButtons/RobotoCredits"]
+size = Vector2i(350, 350)
+unresizable = false
+borderless = false
+min_size = Vector2i(350, 350)
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/LicenseButtons/RobotoCredits/Popup"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.176471, 0.176471, 0.176471, 1)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/LicenseButtons/RobotoCredits/Popup"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/LicenseButtons/RobotoCredits/Popup/ScrollContainer"]
+layout_mode = 2
+offset_right = 1280.0
+offset_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_alignment = 1
+autowrap_mode = 2
+script = SubResource("GDScript_7hn1t")
+text_file_path = "res://Fonts/Roboto_Mono/LICENSE.txt"
+
+[connection signal="pressed" from="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/LicenseButtons/RobotoCredits" to="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/LicenseButtons/RobotoCredits/Popup" method="popup_centered_ratio" binds= [0.5]]
 
 [editable path="Grid"]

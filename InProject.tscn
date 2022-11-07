@@ -24,66 +24,6 @@ coord_label = NodePath("../UI/MarginContainer/CoordLabel")
 
 [node name="UI" parent="." instance=ExtResource("4_v4jb4")]
 
-[node name="Top Bar" parent="UI/TopBar" index="0"]
-custom_minimum_size = Vector2(0, 72)
-
-[node name="MarginContainer" parent="UI/TopBar/Top Bar" index="0"]
-layout_mode = 3
-
-[node name="HBoxContainer" parent="UI/TopBar/Top Bar/MarginContainer" index="0"]
-layout_mode = 3
-
-[node name="HomeButton" parent="UI/TopBar/Top Bar/MarginContainer/HBoxContainer" index="0"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 3
-
-[node name="UpFolderButton" parent="UI/TopBar/Top Bar/MarginContainer/HBoxContainer" index="1"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 3
-
-[node name="CenterButton" parent="UI/TopBar/Top Bar/MarginContainer/HBoxContainer" index="2"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 3
-
-[node name="CenterFilesButton" parent="UI/TopBar/Top Bar/MarginContainer/HBoxContainer" index="3"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 3
-
-[node name="Label" parent="UI/TopBar/Top Bar/MarginContainer/HBoxContainer" index="4"]
-layout_mode = 3
-
-[node name="SaveButton" parent="UI/TopBar/Top Bar/MarginContainer/HBoxContainer" index="5"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 3
-
-[node name="CloseButton" parent="UI/TopBar/Top Bar/MarginContainer/HBoxContainer" index="6"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 3
-
-[node name="Side Bar" parent="UI/SideBar" index="0"]
-custom_minimum_size = Vector2(72, 0)
-
-[node name="MarginContainer" parent="UI/SideBar/Side Bar" index="0"]
-layout_mode = 3
-
-[node name="VBoxContainer" parent="UI/SideBar/Side Bar/MarginContainer" index="0"]
-layout_mode = 3
-
-[node name="TextboxButton" parent="UI/SideBar/Side Bar/MarginContainer/VBoxContainer" index="0"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 3
-
-[node name="FolderButton" parent="UI/SideBar/Side Bar/MarginContainer/VBoxContainer" index="1"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 3
-
-[node name="ImageButton" parent="UI/SideBar/Side Bar/MarginContainer/VBoxContainer" index="2"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 3
-
-[node name="CoordLabel" parent="UI/MarginContainer" index="0"]
-layout_mode = 3
-
 [node name="FileObjects" type="Node" parent="."]
 script = SubResource("GDScript_syp4w")
 
