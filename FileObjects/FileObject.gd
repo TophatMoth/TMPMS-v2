@@ -15,10 +15,14 @@ var being_held : bool = false;
 
 func _ready():
 	# Connect to its own signals
+	@warning_ignore(return_value_discarded)
 	close_requested.connect(close_button_pressed);
+	@warning_ignore(return_value_discarded)
 	size_changed.connect(update_global_position);
 	# Connect to other Nodes' signals
+	@warning_ignore(return_value_discarded)
 	get_tree().root.size_changed.connect(update_local_position);
+	@warning_ignore(return_value_discarded)
 	Global.camera_moved.connect(update_local_position);
 	# Loading needs to be done for update_local_position() to work
 	await get_tree().process_frame;

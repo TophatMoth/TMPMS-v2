@@ -1,0 +1,284 @@
+[gd_scene load_steps=6 format=3 uid="uid://b3vhpxl4k4mv3"]
+
+[ext_resource type="PackedScene" uid="uid://cs5bxtio4lyn5" path="res://Grid.tscn" id="1_4hnip"]
+
+[sub_resource type="GDScript" id="GDScript_2annu"]
+script/source = "extends ParallaxBackground
+
+@export var scroll_speed : Vector2 = Vector2(-80.0, 64);
+
+func _process(delta):
+	scroll_base_offset += scroll_speed * delta;
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_8e5s1"]
+font_size = 28
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_vxoo5"]
+
+[sub_resource type="GDScript" id="GDScript_5kcot"]
+script/source = "extends Button
+
+@export var link : String = \"\";
+
+func _pressed():
+	@warning_ignore(return_value_discarded)
+	OS.shell_open(link);
+"
+
+[node name="ProjectSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Grid" parent="." instance=ExtResource("1_4hnip")]
+script = SubResource("GDScript_2annu")
+
+[node name="X Axis" parent="Grid" index="1"]
+visible = false
+
+[node name="Y Axis" parent="Grid" index="2"]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.2
+anchor_right = 0.8
+anchor_bottom = 0.8
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.501961)
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect/MarginContainer"]
+layout_mode = 2
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 760.0
+offset_bottom = 424.0
+color = Color(1, 1, 1, 0.12549)
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/MarginContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer/ColorRect/MarginContainer"]
+layout_mode = 2
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 746.0
+offset_bottom = 410.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+offset_right = 740.0
+offset_bottom = 42.0
+text = "TophatMoth Project Management System"
+label_settings = SubResource("LabelSettings_8e5s1")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Credits" type="Label" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+offset_top = 50.0
+offset_right = 740.0
+offset_bottom = 76.0
+size_flags_vertical = 8
+text = "By Kitty_McTophat and Procymbopteryx"
+label_settings = SubResource("LabelSettings_vxoo5")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+offset_top = 84.0
+offset_right = 740.0
+offset_bottom = 364.0
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+offset_right = 368.0
+offset_bottom = 280.0
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+offset_right = 368.0
+offset_bottom = 96.0
+focus_mode = 0
+theme_override_font_sizes/font_size = 24
+text = "New Project"
+
+[node name="Button2" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+offset_top = 100.0
+offset_right = 368.0
+offset_bottom = 196.0
+focus_mode = 0
+theme_override_font_sizes/font_size = 24
+text = "Load Project
+"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+offset_left = 372.0
+offset_right = 740.0
+offset_bottom = 280.0
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer"]
+layout_mode = 2
+offset_right = 360.0
+offset_bottom = 451.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+offset_right = 360.0
+offset_bottom = 31.0
+focus_mode = 0
+text = "Recent Project"
+
+[node name="Button2" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+offset_top = 35.0
+offset_right = 360.0
+offset_bottom = 66.0
+focus_mode = 0
+text = "Recent Project"
+
+[node name="Button3" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+offset_top = 70.0
+offset_right = 360.0
+offset_bottom = 101.0
+focus_mode = 0
+text = "Recent Project"
+
+[node name="Button4" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+offset_top = 105.0
+offset_right = 360.0
+offset_bottom = 136.0
+focus_mode = 0
+text = "Recent Project"
+
+[node name="Button5" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+offset_top = 140.0
+offset_right = 360.0
+offset_bottom = 171.0
+focus_mode = 0
+text = "Recent Project"
+
+[node name="Button6" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+offset_top = 175.0
+offset_right = 360.0
+offset_bottom = 206.0
+focus_mode = 0
+text = "Recent Project"
+
+[node name="Button7" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+offset_top = 210.0
+offset_right = 360.0
+offset_bottom = 241.0
+focus_mode = 0
+text = "Recent Project"
+
+[node name="Button8" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+offset_top = 245.0
+offset_right = 360.0
+offset_bottom = 276.0
+focus_mode = 0
+text = "Recent Project"
+
+[node name="Button9" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+offset_top = 280.0
+offset_right = 360.0
+offset_bottom = 311.0
+focus_mode = 0
+text = "Recent Project"
+
+[node name="Button10" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+offset_top = 315.0
+offset_right = 360.0
+offset_bottom = 346.0
+focus_mode = 0
+text = "Recent Project"
+
+[node name="Button11" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+offset_top = 350.0
+offset_right = 360.0
+offset_bottom = 381.0
+focus_mode = 0
+text = "Recent Project"
+
+[node name="Button12" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+offset_top = 385.0
+offset_right = 360.0
+offset_bottom = 416.0
+focus_mode = 0
+text = "Recent Project"
+
+[node name="Button13" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+offset_top = 420.0
+offset_right = 360.0
+offset_bottom = 451.0
+focus_mode = 0
+text = "Recent Project"
+
+[node name="GodotCredits" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(250, 32)
+layout_mode = 2
+offset_left = 245.0
+offset_top = 372.0
+offset_right = 495.0
+offset_bottom = 404.0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+focus_mode = 0
+text = "Made with the Godot Engine"
+script = SubResource("GDScript_5kcot")
+link = "https://godotengine.org/license"
+
+[editable path="Grid"]

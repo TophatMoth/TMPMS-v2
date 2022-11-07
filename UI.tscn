@@ -46,7 +46,7 @@ always_on_top = true
 script = SubResource("GDScript_tbdg4")
 
 [node name="Top Bar" type="ColorRect" parent="TopBar"]
-custom_minimum_size = Vector2i(0, 72)
+custom_minimum_size = Vector2(0, 72)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -74,7 +74,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="HomeButton" type="Button" parent="TopBar/Top Bar/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2i(64, 64)
+custom_minimum_size = Vector2(64, 64)
 offset_right = 64.0
 offset_bottom = 712.0
 tooltip_text = "Go to the project's home folder"
@@ -83,7 +83,7 @@ icon = ExtResource("1_6ecu8")
 icon_alignment = 1
 
 [node name="UpFolderButton" type="Button" parent="TopBar/Top Bar/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2i(64, 64)
+custom_minimum_size = Vector2(64, 64)
 offset_left = 68.0
 offset_right = 132.0
 offset_bottom = 712.0
@@ -93,7 +93,7 @@ icon = ExtResource("2_74m46")
 icon_alignment = 1
 
 [node name="CenterButton" type="Button" parent="TopBar/Top Bar/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2i(64, 64)
+custom_minimum_size = Vector2(64, 64)
 offset_left = 136.0
 offset_right = 200.0
 offset_bottom = 712.0
@@ -103,7 +103,7 @@ icon = ExtResource("3_168dc")
 icon_alignment = 1
 
 [node name="CenterFilesButton" type="Button" parent="TopBar/Top Bar/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2i(64, 64)
+custom_minimum_size = Vector2(64, 64)
 offset_left = 204.0
 offset_right = 268.0
 offset_bottom = 712.0
@@ -124,7 +124,7 @@ vertical_alignment = 1
 clip_text = true
 
 [node name="SaveButton" type="Button" parent="TopBar/Top Bar/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2i(64, 64)
+custom_minimum_size = Vector2(64, 64)
 offset_left = 1140.0
 offset_right = 1204.0
 offset_bottom = 712.0
@@ -133,7 +133,7 @@ icon = ExtResource("5_qp8or")
 icon_alignment = 1
 
 [node name="CloseButton" type="Button" parent="TopBar/Top Bar/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2i(64, 64)
+custom_minimum_size = Vector2(64, 64)
 offset_left = 1208.0
 offset_right = 1272.0
 offset_bottom = 712.0
@@ -154,7 +154,7 @@ resize_axis = 1
 subtract_amount = 72
 
 [node name="Side Bar" type="ColorRect" parent="SideBar"]
-custom_minimum_size = Vector2i(72, 0)
+custom_minimum_size = Vector2(72, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -182,7 +182,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TextboxButton" type="Button" parent="SideBar/Side Bar/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2i(64, 64)
+custom_minimum_size = Vector2(64, 64)
 offset_right = 1272.0
 offset_bottom = 64.0
 tooltip_text = "Add a textbox"
@@ -191,7 +191,7 @@ icon = ExtResource("7_y56ab")
 icon_alignment = 1
 
 [node name="FolderButton" type="Button" parent="SideBar/Side Bar/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2i(64, 64)
+custom_minimum_size = Vector2(64, 64)
 offset_top = 68.0
 offset_right = 1272.0
 offset_bottom = 132.0
@@ -201,7 +201,7 @@ icon = ExtResource("8_7wiit")
 icon_alignment = 1
 
 [node name="ImageButton" type="Button" parent="SideBar/Side Bar/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2i(64, 64)
+custom_minimum_size = Vector2(64, 64)
 offset_top = 136.0
 offset_right = 1272.0
 offset_bottom = 200.0
