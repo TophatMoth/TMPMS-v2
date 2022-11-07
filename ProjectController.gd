@@ -22,7 +22,7 @@ func _on_ui_button_pressed(button_id : int):
 			save_data();
 		ProjectUI.CLOSE:
 			save_data();
-			get_tree().quit();
+			Global.change_scene("res://ProjectSelect.tscn");
 		ProjectUI.ADD_TEXTBOX:
 			spawn_file_object(textbox_scene);
 		ProjectUI.ADD_FOLDER:
@@ -41,7 +41,7 @@ func center_files():
 
 func spawn_file_object(file_object_scene : PackedScene):
 	var new_fo := file_object_scene.instantiate();
-	$FileObjects.add_child(new_fo);
+	Global.file_obj_container.add_child(new_fo);
 	if new_fo is FileObject:
 		new_fo.global_position = $Camera2D.position;
 

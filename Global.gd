@@ -16,15 +16,24 @@ var last_frame_calculated : int = -1;
 func _ready():
 	process_priority = 1;
 	await get_tree().process_frame;
+	new_scene_loaded();
+
+func change_scene(path : String):
+	proj_controller = null;
+	file_obj_container = null;
+	@warning_ignore(return_value_discarded)
+	get_tree().change_scene_to_packed(load(path));
+	await get_tree().process_frame;
+	new_scene_loaded();
+
+func new_scene_loaded():
 	if get_tree().current_scene is ProjectController:
 		proj_controller = get_tree().current_scene;
+	else:
+		proj_controller = null;
 
 func emit_camera_moved():
 	camera_moved.emit();
-
-#func _process(_delta):
-	#if Engine.get_process_frames() % 4 == 0:
-	#	print(mouse_position);
 
 func get_mouse_pos() -> Vector2i:
 	if get_tree().root.has_focus():
