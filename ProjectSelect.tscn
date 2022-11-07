@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b3vhpxl4k4mv3"]
+[gd_scene load_steps=9 format=3 uid="uid://b3vhpxl4k4mv3"]
 
 [ext_resource type="PackedScene" uid="uid://cs5bxtio4lyn5" path="res://Grid.tscn" id="1_4hnip"]
 [ext_resource type="Theme" uid="uid://b7dvcqdb0do4n" path="res://DefaultTheme.tres" id="1_okj61"]
@@ -18,6 +18,10 @@ outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_vxoo5"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_qyegb"]
+color = Color(0, 0, 0, 0.25098)
+thickness = 6
 
 [sub_resource type="GDScript" id="GDScript_5kcot"]
 script/source = "extends Button
@@ -133,9 +137,24 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 offset_top = 82.0
+offset_right = 740.0
+offset_bottom = 88.0
+theme_override_constants/separation = 6
+theme_override_styles/separator = SubResource("StyleBoxLine_qyegb")
+
+[node name="HSeparator2" type="HSeparator" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+offset_top = 96.0
+offset_right = 740.0
+offset_bottom = 100.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+offset_top = 108.0
 offset_right = 740.0
 offset_bottom = 364.0
 size_flags_vertical = 3
@@ -143,7 +162,7 @@ size_flags_vertical = 3
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 offset_right = 368.0
-offset_bottom = 282.0
+offset_bottom = 256.0
 size_flags_horizontal = 3
 
 [node name="Button" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
@@ -170,7 +189,7 @@ text = "Load Project
 layout_mode = 2
 offset_left = 372.0
 offset_right = 740.0
-offset_bottom = 282.0
+offset_bottom = 256.0
 size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer"]
