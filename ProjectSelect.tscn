@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://b3vhpxl4k4mv3"]
+[gd_scene load_steps=8 format=3 uid="uid://b3vhpxl4k4mv3"]
 
 [ext_resource type="PackedScene" uid="uid://cs5bxtio4lyn5" path="res://Grid.tscn" id="1_4hnip"]
-[ext_resource type="Theme" uid="uid://b7dvcqdb0do4n" path="res://DefaultTheme.tres" id="1_okj61"]
 
 [sub_resource type="GDScript" id="GDScript_2annu"]
 script/source = "extends ParallaxBackground
@@ -52,7 +51,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_okj61")
 
 [node name="Grid" parent="." instance=ExtResource("1_4hnip")]
 script = SubResource("GDScript_2annu")

@@ -1,9 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://c00ndr6p78vj5"]
+[gd_scene load_steps=13 format=3 uid="uid://c00ndr6p78vj5"]
 
 [ext_resource type="Texture2D" uid="uid://cr1cjimrk04e6" path="res://ButtonIcons/Home.png" id="1_6ecu8"]
 [ext_resource type="Script" path="res://UI.gd" id="1_qeb1a"]
 [ext_resource type="Texture2D" uid="uid://cafdr0dwhkkpx" path="res://ButtonIcons/Up Folder.png" id="2_74m46"]
-[ext_resource type="Theme" uid="uid://b7dvcqdb0do4n" path="res://DefaultTheme.tres" id="2_cjcll"]
 [ext_resource type="Texture2D" uid="uid://crapss4ds4h4l" path="res://ButtonIcons/Center.png" id="3_168dc"]
 [ext_resource type="Texture2D" uid="uid://d0a51nyjn02av" path="res://ButtonIcons/CenterFiles.png" id="4_n1mjh"]
 [ext_resource type="Texture2D" uid="uid://cwwu1m41qffhx" path="res://ButtonIcons/FloppyDisk.png" id="5_qp8or"]
@@ -46,7 +45,6 @@ size = Vector2i(1280, 72)
 unresizable = true
 borderless = true
 always_on_top = true
-theme = ExtResource("2_cjcll")
 script = SubResource("GDScript_tbdg4")
 
 [node name="Top Bar" type="ColorRect" parent="TopBar"]
@@ -152,7 +150,6 @@ size = Vector2i(72, 648)
 unresizable = true
 borderless = true
 always_on_top = true
-theme = ExtResource("2_cjcll")
 script = SubResource("GDScript_tbdg4")
 offset = Vector2i(0, 72)
 resize_axis = 1
@@ -222,7 +219,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
-theme = ExtResource("2_cjcll")
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 4
 
