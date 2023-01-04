@@ -14,6 +14,16 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://FileObjects/FileObject.gd"
 }, {
+"base": "FileObject",
+"class": &"FolderFileObject",
+"language": &"GDScript",
+"path": "res://FileObjects/FolderFileObject.gd"
+}, {
+"base": "FileObject",
+"class": &"ImageFileObject",
+"language": &"GDScript",
+"path": "res://FileObjects/ImageFileObject.gd"
+}, {
 "base": "Node2D",
 "class": &"ProjectController",
 "language": &"GDScript",
@@ -23,11 +33,19 @@ _global_script_classes=[{
 "class": &"ProjectUI",
 "language": &"GDScript",
 "path": "res://UI.gd"
+}, {
+"base": "FileObject",
+"class": &"TextFileObject",
+"language": &"GDScript",
+"path": "res://FileObjects/TextFileObject.gd"
 }]
 _global_script_class_icons={
 "FileObject": "",
+"FolderFileObject": "",
+"ImageFileObject": "",
 "ProjectController": "",
-"ProjectUI": ""
+"ProjectUI": "",
+"TextFileObject": ""
 }
 
 [application]

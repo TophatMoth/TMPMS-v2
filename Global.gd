@@ -12,6 +12,7 @@ var mouse_position : Vector2i = Vector2i.ZERO:
 			last_frame_calculated = Engine.get_process_frames();
 		return mouse_position;
 var last_frame_calculated : int = -1;
+var dir:String = "/" #Should NOT end with '/', ex: C:/User/ProjectFolder
 
 func _ready():
 	process_priority = 1;

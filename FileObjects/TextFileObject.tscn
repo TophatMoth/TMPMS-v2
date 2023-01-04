@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://o5ukkjsjkqge"]
+[gd_scene load_steps=3 format=3 uid="uid://o5ukkjsjkqge"]
 
 [ext_resource type="PackedScene" uid="uid://dg47axgtxy67i" path="res://FileObjects/BaseFileObject.tscn" id="1_qjn8m"]
+[ext_resource type="Script" path="res://FileObjects/TextFileObject.gd" id="2_lf0b2"]
 
 [node name="FileObject" instance=ExtResource("1_qjn8m")]
+script = ExtResource("2_lf0b2")
 
 [node name="TextEdit" type="TextEdit" parent="." index="0"]
 anchors_preset = 15

@@ -13,6 +13,8 @@ var last_local_position : Vector2i = Vector2i.ZERO;
 
 var being_held : bool = false;
 
+var local_filename : String = "" #EX: Text1.txt, Image1.txt, Folder1/
+
 func _ready():
 	# Connect to its own signals
 	@warning_ignore(return_value_discarded)
@@ -27,6 +29,13 @@ func _ready():
 	# Loading needs to be done for update_local_position() to work
 	await get_tree().process_frame;
 	update_local_position();
+	if local_filename == "":
+		find_valid_name()
+	load_content()
+
+func find_valid_name() -> void:
+	print("find_valid_name was not overridden!")
+	return
 
 func update_local_position():
 	if being_held:
@@ -49,6 +58,16 @@ func update_global_position():
 func get_lop_left(cam : Camera2D) -> Vector2i:
 	# Might be wrong by a pixel, but it doen't matter
 	return Vector2i(cam.position) - (get_tree().root.size / 2);
+
+func save_content() -> void:
+	print("save_content was not overridden!")
+
+func load_content() -> void:
+	print("load_content was not overridden!")
+
+func get_position_data() -> Array:
+	#Returns [x pos, y pos, width, height]
+	return [global_position[0],global_position[1],size[0],size[1]]
 
 func _process(_delta):
 	if last_local_position != position:
