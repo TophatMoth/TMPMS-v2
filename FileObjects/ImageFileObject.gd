@@ -1,6 +1,9 @@
 extends FileObject
 class_name ImageFileObject
 
+func get_object_type():
+	return "image"
+	
 func save_content():
 	return
 

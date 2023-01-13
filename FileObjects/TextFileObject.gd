@@ -1,6 +1,9 @@
 extends FileObject
 class_name TextFileObject
 
+func get_object_type():
+	return "text"
+
 func save_content():
 	var f:FileAccess = FileAccess.open(Global.dir+"/"+local_filename,FileAccess.WRITE)
 	f.store_string($TextEdit.text)
@@ -19,5 +22,4 @@ func find_valid_name()->void:
 	local_filename = "Text"+str(num)+".txt"
 	var f:FileAccess = FileAccess.open(Global.dir+'/'+local_filename,FileAccess.WRITE)
 	f.store_string("")
-	f.flush()
 	return

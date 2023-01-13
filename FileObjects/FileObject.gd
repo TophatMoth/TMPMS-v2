@@ -15,6 +15,10 @@ var being_held : bool = false;
 
 var local_filename : String = "" #EX: Text1.txt, Image1.txt, Folder1/
 
+func get_object_type():
+	print("FUNCTION WAS NOT OVERRIDDEN")
+	return "FUNCTION WAS NOT OVERRIDDEN"
+
 func _ready():
 	# Connect to its own signals
 	@warning_ignore(return_value_discarded)
@@ -64,10 +68,6 @@ func save_content() -> void:
 
 func load_content() -> void:
 	print("load_content was not overridden!")
-
-func get_position_data() -> Array:
-	#Returns [x pos, y pos, width, height]
-	return [global_position[0],global_position[1],size[0],size[1]]
 
 func _process(_delta):
 	if last_local_position != position:

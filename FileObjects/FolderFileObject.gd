@@ -1,11 +1,21 @@
 extends FileObject
 class_name FolderFileObject
 
+func get_object_type():
+	return "folder"
+
+func get_title():
+	return $VBoxContainer/TextEdit.text
+
 func save_content():
 	return
 
 func load_content():
 	$VBoxContainer/TextEdit.text = local_filename.replace("/","")
+	return
+
+func set_title(string:String):
+	$VBoxContainer/TextEdit.text = string
 	return
 
 func find_valid_name() -> void:
