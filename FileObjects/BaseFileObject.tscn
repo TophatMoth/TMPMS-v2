@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dg47axgtxy67i"]
-
-[ext_resource type="Script" path="res://FileObjects/FileObject.gd" id="1_8rn4g"]
-
-[node name="FileObject" type="Window"]
-disable_3d = true
-min_size = Vector2i(20, 20)
-content_scale_aspect = 4
-script = ExtResource("1_8rn4g")

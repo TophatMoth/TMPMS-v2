@@ -1,6 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://b3vhpxl4k4mv3"]
+[gd_scene load_steps=10 format=3 uid="uid://b3vhpxl4k4mv3"]
 
-[ext_resource type="PackedScene" uid="uid://cs5bxtio4lyn5" path="res://Grid.tscn" id="1_4hnip"]
+[ext_resource type="Texture2D" uid="uid://bgt6kxwsex4wb" path="res://Background.png" id="1_ugbo8"]
 
 [sub_resource type="GDScript" id="GDScript_2annu"]
 script/source = "extends ParallaxBackground
@@ -9,6 +9,54 @@ script/source = "extends ParallaxBackground
 
 func _process(delta):
 	scroll_base_offset += scroll_speed * delta;
+"
+
+[sub_resource type="GDScript" id="GDScript_6qfl3"]
+script/source = "extends ParallaxLayer
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	var max_dim : Vector2i = DisplayServer.screen_get_size(-1);
+	
+	# Gets the maximum size of all the screens on the device and stores them in the max_dim array
+	for i in range(DisplayServer.get_screen_count()):
+		for j in range(2):
+			max_dim[j] = max(max_dim[j], DisplayServer.screen_get_size(i)[j]);
+	
+	# Rounds every dimension up to a multiple of 64 so the grid pattern stays smooth
+	for i in range(2):
+		max_dim[i] = ceil(max_dim[i] / 64.0) * 64;
+	
+	# Applies the calculated sizes to the grid pattern and updates the motion_mirroring
+	motion_mirroring = max_dim;
+	$TextureRect.set_size(max_dim);
+"
+
+[sub_resource type="GDScript" id="GDScript_qnhw8"]
+script/source = "extends ParallaxLayer
+
+@export_enum(\"X\", \"Y\") var axis : int = 0;
+@export var line_width : float = 4.0;
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	var max_dim : Vector2i = DisplayServer.screen_get_size(-1);
+	
+	# Gets the maximum screen size for the target axis and stores it in max_dim[axis]
+	for i in range(DisplayServer.get_screen_count()):
+		max_dim[axis] = max(max_dim[axis], DisplayServer.screen_get_size(i)[axis]);
+	
+	# Sets the width on the opposite axis to the provided value
+	max_dim[1 - axis] = int(line_width);
+	
+	# Applies the calulcated sizes and updates the motion_mirroring
+	motion_mirroring[axis] = max_dim[axis];
+	$ColorRect.set_size(max_dim);
+	
+	# Sets the position on the opposite axis so that it's centered
+	var color_rect_position : Vector2 = Vector2(0.0, 0.0);
+	color_rect_position[1 - axis] = -line_width / 2.0;
+	$ColorRect._set_position(color_rect_position);
 "
 
 [sub_resource type="LabelSettings" id="LabelSettings_8e5s1"]
@@ -28,7 +76,6 @@ script/source = "extends Button
 @export var link : String = \"\";
 
 func _pressed():
-	@warning_ignore(return_value_discarded)
 	OS.shell_open(link);
 "
 
@@ -52,18 +99,45 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Grid" parent="." instance=ExtResource("1_4hnip")]
+[node name="Grid" type="ParallaxBackground" parent="."]
 script = SubResource("GDScript_2annu")
 
-[node name="X Axis" parent="Grid" index="1"]
-visible = false
+[node name="GridBG" type="ParallaxLayer" parent="Grid"]
+motion_mirroring = Vector2(1280, 768)
+script = SubResource("GDScript_6qfl3")
 
-[node name="Y Axis" parent="Grid" index="2"]
+[node name="TextureRect" type="TextureRect" parent="Grid/GridBG"]
+offset_right = 1280.0
+offset_bottom = 768.0
+texture = ExtResource("1_ugbo8")
+stretch_mode = 1
+
+[node name="X Axis" type="ParallaxLayer" parent="Grid"]
 visible = false
+motion_mirroring = Vector2(1280, 0)
+script = SubResource("GDScript_qnhw8")
+
+[node name="ColorRect" type="ColorRect" parent="Grid/X Axis"]
+offset_top = -2.0
+offset_right = 1280.0
+offset_bottom = 2.0
+color = Color(0.533333, 0.117647, 0.117647, 1)
+
+[node name="Y Axis" type="ParallaxLayer" parent="Grid"]
+visible = false
+motion_mirroring = Vector2(0, 720)
+script = SubResource("GDScript_qnhw8")
+axis = 1
+
+[node name="ColorRect" type="ColorRect" parent="Grid/Y Axis"]
+offset_left = -2.0
+offset_right = 2.0
+offset_bottom = 720.0
+color = Color(0.192157, 0.533333, 0.117647, 1)
 
 [node name="ColorRect" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(768, 432)
-anchors_preset = -1
+layout_mode = 0
 anchor_left = 0.2
 anchor_top = 0.2
 anchor_right = 0.8
@@ -73,7 +147,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.501961)
 
 [node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
-anchors_preset = 15
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -84,14 +158,11 @@ theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
 [node name="ColorRect" type="ColorRect" parent="ColorRect/MarginContainer"]
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 760.0
-offset_bottom = 424.0
+layout_mode = 2
 color = Color(1, 1, 1, 0.0313726)
 
 [node name="MarginContainer" type="MarginContainer" parent="ColorRect/MarginContainer/ColorRect"]
-anchors_preset = 15
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -102,26 +173,18 @@ theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 6
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer/ColorRect/MarginContainer"]
-offset_left = 6.0
-offset_top = 6.0
-offset_right = 746.0
-offset_bottom = 410.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 theme_override_constants/separation = 8
 
 [node name="Label" type="Label" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer"]
-offset_right = 740.0
-offset_bottom = 41.0
+layout_mode = 2
 text = "TophatMoth Project Management System"
 label_settings = SubResource("LabelSettings_8e5s1")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Credits" type="Label" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer"]
-offset_top = 49.0
-offset_right = 740.0
-offset_bottom = 74.0
+layout_mode = 2
 size_flags_vertical = 8
 text = "By Kitty_McTophat and Procymbopteryx"
 label_settings = SubResource("LabelSettings_vxoo5")
@@ -130,159 +193,117 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="HSeparator" type="HSeparator" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer"]
-offset_top = 82.0
-offset_right = 740.0
-offset_bottom = 88.0
+layout_mode = 2
 theme_override_constants/separation = 6
 theme_override_styles/separator = SubResource("StyleBoxLine_qyegb")
 
 [node name="HSeparator2" type="HSeparator" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer"]
 self_modulate = Color(1, 1, 1, 0)
-offset_top = 96.0
-offset_right = 740.0
-offset_bottom = 100.0
+layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer"]
-offset_top = 108.0
-offset_right = 740.0
-offset_bottom = 364.0
+layout_mode = 2
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer"]
-offset_right = 368.0
-offset_bottom = 256.0
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Button" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 96)
-offset_right = 368.0
-offset_bottom = 96.0
+layout_mode = 2
 focus_mode = 0
 theme_override_font_sizes/font_size = 24
 text = "New Project"
 
 [node name="Button2" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 96)
-offset_top = 100.0
-offset_right = 368.0
-offset_bottom = 196.0
+layout_mode = 2
 focus_mode = 0
 theme_override_font_sizes/font_size = 24
 text = "Load Project
 "
 
 [node name="ScrollContainer" type="ScrollContainer" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer"]
-offset_left = 372.0
-offset_right = 740.0
-offset_bottom = 256.0
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer"]
-offset_right = 360.0
-offset_bottom = 438.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Button" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
-offset_right = 360.0
-offset_bottom = 30.0
+layout_mode = 2
 focus_mode = 0
 text = "Recent Project"
 
 [node name="Button2" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
-offset_top = 34.0
-offset_right = 360.0
-offset_bottom = 64.0
+layout_mode = 2
 focus_mode = 0
 text = "Recent Project"
 
 [node name="Button3" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
-offset_top = 68.0
-offset_right = 360.0
-offset_bottom = 98.0
+layout_mode = 2
 focus_mode = 0
 text = "Recent Project"
 
 [node name="Button4" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
-offset_top = 102.0
-offset_right = 360.0
-offset_bottom = 132.0
+layout_mode = 2
 focus_mode = 0
 text = "Recent Project"
 
 [node name="Button5" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
-offset_top = 136.0
-offset_right = 360.0
-offset_bottom = 166.0
+layout_mode = 2
 focus_mode = 0
 text = "Recent Project"
 
 [node name="Button6" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
-offset_top = 170.0
-offset_right = 360.0
-offset_bottom = 200.0
+layout_mode = 2
 focus_mode = 0
 text = "Recent Project"
 
 [node name="Button7" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
-offset_top = 204.0
-offset_right = 360.0
-offset_bottom = 234.0
+layout_mode = 2
 focus_mode = 0
 text = "Recent Project"
 
 [node name="Button8" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
-offset_top = 238.0
-offset_right = 360.0
-offset_bottom = 268.0
+layout_mode = 2
 focus_mode = 0
 text = "Recent Project"
 
 [node name="Button9" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
-offset_top = 272.0
-offset_right = 360.0
-offset_bottom = 302.0
+layout_mode = 2
 focus_mode = 0
 text = "Recent Project"
 
 [node name="Button10" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
-offset_top = 306.0
-offset_right = 360.0
-offset_bottom = 336.0
+layout_mode = 2
 focus_mode = 0
 text = "Recent Project"
 
 [node name="Button11" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
-offset_top = 340.0
-offset_right = 360.0
-offset_bottom = 370.0
+layout_mode = 2
 focus_mode = 0
 text = "Recent Project"
 
 [node name="Button12" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
-offset_top = 374.0
-offset_right = 360.0
-offset_bottom = 404.0
+layout_mode = 2
 focus_mode = 0
 text = "Recent Project"
 
 [node name="Button13" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
-offset_top = 408.0
-offset_right = 360.0
-offset_bottom = 438.0
+layout_mode = 2
 focus_mode = 0
 text = "Recent Project"
 
 [node name="LicenseButtons" type="HBoxContainer" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer"]
-offset_top = 372.0
-offset_right = 740.0
-offset_bottom = 404.0
+layout_mode = 2
 
 [node name="GodotCredits" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/LicenseButtons"]
 custom_minimum_size = Vector2(250, 32)
-offset_left = 55.0
-offset_right = 313.0
-offset_bottom = 32.0
+layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 8
 focus_mode = 0
@@ -292,9 +313,7 @@ link = "https://godotengine.org/license"
 
 [node name="RobotoCredits" type="Button" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/LicenseButtons"]
 custom_minimum_size = Vector2(250, 32)
-offset_left = 417.0
-offset_right = 695.0
-offset_bottom = 32.0
+layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 8
 focus_mode = 0
@@ -322,8 +341,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/LicenseButtons/RobotoCredits/Popup/ScrollContainer"]
-offset_right = 1280.0
-offset_bottom = 720.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 horizontal_alignment = 1
@@ -333,5 +351,3 @@ text_file_path = "res://Fonts/Roboto_Mono/LICENSE.txt"
 
 [connection signal="pressed" from="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/LicenseButtons/RobotoCredits" to="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/LicenseButtons/RobotoCredits/Popup" method="popup_centered_ratio" binds= [0.5]]
 [connection signal="about_to_popup" from="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/LicenseButtons/RobotoCredits/Popup" to="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/LicenseButtons/RobotoCredits/Popup/ScrollContainer" method="set_v_scroll" binds= [0]]
-
-[editable path="Grid"]

@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2mk8sp2canj5"]
+
+[ext_resource type="PackedScene" uid="uid://d4bvvcabexaju" path="res://FileNodes/Base.tscn" id="1_4qqwn"]
+[ext_resource type="Texture2D" uid="uid://dn2gimai8e2wm" path="res://ButtonIcons/Folder.png" id="2_tmku6"]
+
+[node name="Base" instance=ExtResource("1_4qqwn")]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Content" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="TextEdit" type="TextEdit" parent="Content/VBoxContainer" index="0"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+text = "New Folder"
+placeholder_text = "Enter a title..."
+wrap_mode = 1
+
+[node name="Button" type="Button" parent="Content/VBoxContainer" index="1"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="Content/VBoxContainer/Button" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_tmku6")
+expand_mode = 1
+stretch_mode = 5

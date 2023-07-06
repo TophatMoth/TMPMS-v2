@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://50ykg5mec0oh"]
+
+[ext_resource type="PackedScene" uid="uid://d4bvvcabexaju" path="res://FileNodes/Base.tscn" id="1_1wdax"]
+
+[node name="Base" instance=ExtResource("1_1wdax")]
+
+[node name="TextEdit" type="TextEdit" parent="Content" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+placeholder_text = "Text goes here..."
+wrap_mode = 1

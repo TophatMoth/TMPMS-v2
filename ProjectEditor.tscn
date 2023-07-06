@@ -1,0 +1,167 @@
+[gd_scene load_steps=10 format=3 uid="uid://bsu23rpq2wjhm"]
+
+[ext_resource type="Script" path="res://ProjectEditor.gd" id="1_uqa0h"]
+[ext_resource type="Texture2D" uid="uid://cr1cjimrk04e6" path="res://ButtonIcons/Home.png" id="2_5lmdx"]
+[ext_resource type="Texture2D" uid="uid://cafdr0dwhkkpx" path="res://ButtonIcons/Up Folder.png" id="3_jfs1a"]
+[ext_resource type="Texture2D" uid="uid://cwwu1m41qffhx" path="res://ButtonIcons/FloppyDisk.png" id="4_1y0u4"]
+[ext_resource type="Texture2D" uid="uid://kx67tlx1ihmh" path="res://ButtonIcons/Close Project.png" id="5_sddaj"]
+[ext_resource type="Texture2D" uid="uid://bkqbrmx20sxvm" path="res://ButtonIcons/CreateTextbox.png" id="6_b6hsy"]
+[ext_resource type="Texture2D" uid="uid://cinnmmy84vci0" path="res://ButtonIcons/CreateFolder.png" id="7_dtkcq"]
+[ext_resource type="Texture2D" uid="uid://dfmgb4h78gvd5" path="res://ButtonIcons/CreateImage.png" id="8_yf28n"]
+
+[sub_resource type="GDScript" id="GDScript_0gawg"]
+script/source = "extends GraphEdit
+
+func _ready():
+	add_valid_connection_type(0, 0);
+
+func _on_connection_request(from_node : StringName, from_port : int, to_node : StringName, to_port : int):
+	connect_node(from_node, from_port, to_node, to_port);
+"
+
+[node name="ProjectEditor" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uqa0h")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Top Bar" type="ColorRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+size_flags_vertical = 0
+color = Color(0.145098, 0.145098, 0.164706, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Top Bar"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Top Bar/MarginContainer"]
+layout_mode = 2
+
+[node name="HomeButton" type="Button" parent="VBoxContainer/Top Bar/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+tooltip_text = "Go to the project's home folder"
+focus_mode = 0
+icon = ExtResource("2_5lmdx")
+icon_alignment = 1
+
+[node name="UpFolderButton" type="Button" parent="VBoxContainer/Top Bar/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+tooltip_text = "Go to the folder containing the current one"
+focus_mode = 0
+icon = ExtResource("3_jfs1a")
+icon_alignment = 1
+
+[node name="DirectoryLabel" type="Label" parent="VBoxContainer/Top Bar/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "placeholder_text/placeholder_text/placeholder_text/placeholder_text/if_you_see_this/there_is_a_bug/please_report_it/"
+horizontal_alignment = 2
+vertical_alignment = 1
+clip_text = true
+
+[node name="SaveButton" type="Button" parent="VBoxContainer/Top Bar/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+icon = ExtResource("4_1y0u4")
+icon_alignment = 1
+
+[node name="CloseButton" type="Button" parent="VBoxContainer/Top Bar/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+icon = ExtResource("5_sddaj")
+icon_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="Side Bar" type="ColorRect" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+color = Color(0.211765, 0.211765, 0.239216, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/Side Bar"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/Side Bar/MarginContainer"]
+layout_mode = 2
+
+[node name="TextboxButton" type="Button" parent="VBoxContainer/HBoxContainer/Side Bar/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+tooltip_text = "Add a textbox"
+focus_mode = 0
+icon = ExtResource("6_b6hsy")
+icon_alignment = 1
+
+[node name="FolderButton" type="Button" parent="VBoxContainer/HBoxContainer/Side Bar/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+tooltip_text = "Add a folder"
+focus_mode = 0
+icon = ExtResource("7_dtkcq")
+icon_alignment = 1
+
+[node name="ImageButton" type="Button" parent="VBoxContainer/HBoxContainer/Side Bar/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+tooltip_text = "Add an image"
+focus_mode = 0
+icon = ExtResource("8_yf28n")
+icon_alignment = 1
+
+[node name="GraphEdit" type="GraphEdit" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+snap_distance = 80
+use_snap = false
+connection_lines_curvature = 0.0
+zoom_min = 0.25
+zoom_max = 1.0
+zoom_step = 1.25
+script = SubResource("GDScript_0gawg")
+
+[connection signal="pressed" from="VBoxContainer/Top Bar/MarginContainer/HBoxContainer/HomeButton" to="." method="_on_ui_button_pressed" binds= [0]]
+[connection signal="pressed" from="VBoxContainer/Top Bar/MarginContainer/HBoxContainer/UpFolderButton" to="." method="_on_ui_button_pressed" binds= [1]]
+[connection signal="pressed" from="VBoxContainer/Top Bar/MarginContainer/HBoxContainer/SaveButton" to="." method="_on_ui_button_pressed" binds= [2]]
+[connection signal="pressed" from="VBoxContainer/Top Bar/MarginContainer/HBoxContainer/CloseButton" to="." method="_on_ui_button_pressed" binds= [3]]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Side Bar/MarginContainer/VBoxContainer/TextboxButton" to="." method="_on_ui_button_pressed" binds= [4]]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Side Bar/MarginContainer/VBoxContainer/FolderButton" to="." method="_on_ui_button_pressed" binds= [5]]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Side Bar/MarginContainer/VBoxContainer/ImageButton" to="." method="_on_ui_button_pressed" binds= [6]]
+[connection signal="connection_request" from="VBoxContainer/HBoxContainer/GraphEdit" to="VBoxContainer/HBoxContainer/GraphEdit" method="_on_connection_request"]

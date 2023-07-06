@@ -2,23 +2,23 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0a51nyjn02av"
-path="res://.godot/imported/CenterFiles.png-26e1ec596643ba9c213dfb3bf1182aae.ctex"
+uid="uid://dfmgb4h78gvd5"
+path="res://.godot/imported/CreateImage.png-209acfac17cb872da0a173c5125a0bd2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ButtonIcons/CenterFiles.png"
-dest_files=["res://.godot/imported/CenterFiles.png-26e1ec596643ba9c213dfb3bf1182aae.ctex"]
+source_file="res://ButtonIcons/CreateImage.png"
+dest_files=["res://.godot/imported/CreateImage.png-209acfac17cb872da0a173c5125a0bd2.ctex"]
 
 [params]
 
 compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=false
