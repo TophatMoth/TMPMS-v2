@@ -37,4 +37,4 @@ func load_content() -> void:
 
 func close_button_pressed():
 	# Temporary, later it should have a confirmation popup and delete the associated file
-	queue_free();
+	Global.proj_editor.graph_edit.remove_node(self);

@@ -5,6 +5,7 @@ class_name ProjectEditor
 @onready var folder_scene : PackedScene = preload("res://FileNodes/Folder.tscn");
 @onready var image_scene : PackedScene = preload("res://FileNodes/Image.tscn");
 @onready var scene_dict:Dictionary = {"text":textbox_scene,"folder":folder_scene,"image":image_scene}
+@onready var graph_edit : GraphEdit = %GraphEdit;
 
 enum {
 	HOME, UP_FOLDER,
@@ -43,6 +44,7 @@ func load_project(new_dir:String):
 	for filenode in %GraphEdit.get_children():
 		if filenode is FileNode:
 			filenode.queue_free()
+	graph_edit.scroll_offset = Vector2.ZERO;
 	
 	Global.dir = new_dir
 	if Global.dir == "/":
@@ -58,14 +60,15 @@ func load_project(new_dir:String):
 		f.store_string(JSON.stringify([],"\t"))
 	#Spawn FileNodes
 	for node_metadata in metadata:
+		# ADD LOAD CONNECTIONS FOR GRAPH
 		spawn_file_node(scene_dict[node_metadata["type"]],node_metadata)
 	return
 
 func spawn_file_node(file_node_scene : PackedScene,metadata:Dictionary={}):
 	var new_fn := file_node_scene.instantiate();
-	%GraphEdit.add_child(new_fn);
+	graph_edit.add_child(new_fn);
 	if new_fn is FileNode:
-		new_fn.position_offset = %GraphEdit.scroll_offset + (%GraphEdit.size * 0.5) - (new_fn.size * 0.5);
+		new_fn.position_offset = graph_edit.scroll_offset + (graph_edit.size * 0.5) - (new_fn.size * 0.5);
 		if metadata != {}:
 			new_fn.position_offset = metadata["position"]
 			new_fn.size = metadata["size"]
@@ -78,10 +81,11 @@ func save_data():
 	if Global.dir == "/":
 		return;
 	var json_lis:Array[Dictionary] = []
-	for filenode in %GraphEdit.get_children():
+	for filenode in graph_edit.get_children():
 		if filenode is FileNode:
 			filenode.save_content()
 			json_lis.append(filenode.get_dict());
+	# ADD SAVE FOR CONNECTIONS ON GRAPH
 	var f:FileAccess = FileAccess.open(Global.dir+"/metadata.json",FileAccess.WRITE)
 	f.store_string(JSON.stringify(json_lis,"\t",false))
 	return

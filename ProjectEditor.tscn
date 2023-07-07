@@ -12,11 +12,21 @@
 [sub_resource type="GDScript" id="GDScript_0gawg"]
 script/source = "extends GraphEdit
 
+func remove_node(node : FileNode):
+	for connection in get_connection_list():
+		if connection[\"from\"] == node.name || connection[\"to\"] == node.name:
+			disconnect_node(connection[\"from\"], connection[\"from_port\"], connection[\"to\"], connection[\"to_port\"]);
+	node.queue_free();
+
 func _ready():
 	add_valid_connection_type(0, 0);
+	right_disconnects = true;
 
 func _on_connection_request(from_node : StringName, from_port : int, to_node : StringName, to_port : int):
 	connect_node(from_node, from_port, to_node, to_port);
+
+func _on_disconnection_request(from_node : StringName, from_port : int, to_node : StringName, to_port : int):
+	disconnect_node(from_node, from_port, to_node, to_port);
 "
 
 [node name="ProjectEditor" type="Control"]
@@ -165,3 +175,4 @@ script = SubResource("GDScript_0gawg")
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Side Bar/MarginContainer/VBoxContainer/FolderButton" to="." method="_on_ui_button_pressed" binds= [5]]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Side Bar/MarginContainer/VBoxContainer/ImageButton" to="." method="_on_ui_button_pressed" binds= [6]]
 [connection signal="connection_request" from="VBoxContainer/HBoxContainer/GraphEdit" to="VBoxContainer/HBoxContainer/GraphEdit" method="_on_connection_request"]
+[connection signal="disconnection_request" from="VBoxContainer/HBoxContainer/GraphEdit" to="VBoxContainer/HBoxContainer/GraphEdit" method="_on_disconnection_request"]
