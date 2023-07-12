@@ -21,3 +21,16 @@ script = ExtResource("1_5b02t")
 [node name="Content" type="Control" parent="."]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="ConfirmDelete" type="ConfirmationDialog" parent="."]
+title = "Confirm Delete"
+initial_position = 1
+size = Vector2i(247, 106)
+unresizable = true
+always_on_top = true
+ok_button_text = "Yes"
+dialog_text = "Are you sure you want to
+ delete this file node?"
+
+[connection signal="close_request" from="." to="ConfirmDelete" method="show"]
+[connection signal="confirmed" from="ConfirmDelete" to="." method="remove_node"]

@@ -17,6 +17,9 @@ func remove_node(node : FileNode):
 		if connection[\"from\"] == node.name || connection[\"to\"] == node.name:
 			disconnect_node(connection[\"from\"], connection[\"from_port\"], connection[\"to\"], connection[\"to_port\"]);
 	node.queue_free();
+	remove_child(node)
+	await get_tree().process_frame
+	Global.proj_editor.save_data()
 
 func _ready():
 	add_valid_connection_type(0, 0);

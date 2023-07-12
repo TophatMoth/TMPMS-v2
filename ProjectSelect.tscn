@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://b3vhpxl4k4mv3"]
+[gd_scene load_steps=11 format=3 uid="uid://b3vhpxl4k4mv3"]
 
+[ext_resource type="Script" path="res://ProjectSelect.gd" id="1_36qkb"]
 [ext_resource type="Texture2D" uid="uid://bgt6kxwsex4wb" path="res://Background.png" id="1_ugbo8"]
 
 [sub_resource type="GDScript" id="GDScript_2annu"]
@@ -9,7 +10,7 @@ script/source = "extends ParallaxBackground
 
 func _process(delta):
 	scroll_base_offset += scroll_speed * delta;
-"
+	"
 
 [sub_resource type="GDScript" id="GDScript_6qfl3"]
 script/source = "extends ParallaxLayer
@@ -98,6 +99,61 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_36qkb")
+project_file_contents = Array[String](["This project sucks :(", "This project is cool!", "This project has been certified to contain no cheese by the Lactose Intolerance Board.", "This file is wasting space on your drive.", "You know, it doesn't actually matter what's in this file.", "What do you call a project with no management system?
+
+Bad! (Buh-dum-tss)", "This project cured my depression!", "This project made me 6 inches taller!", "This project made me 6 inches shorter :(", "Project Management System is Vegan!", "No animals were harmed in the making of this file.
+
+(Don't know about the others though)", "This is a work of planning. Names, characters, places, and incidents either are products of the author's imagination or have actually happened. I don't know if you plan to follow through on this.", "Did you ever hear the tragedy of the unfinished project?
+I thought not.
+It's not a story you would hear from someone with this amazing project management system.", "  _______          _           _   __  __       _   _       _____           _           _     __  __                                                   _      _____           _                 
+ |__   __|        | |         | | |  \\/  |     | | | |     |  __ \\         (_)         | |   |  \\/  |                                                 | |    / ____|         | |                
+    | | ___  _ __ | |__   __ _| |_| \\  / | ___ | |_| |__   | |__) | __ ___  _  ___  ___| |_  | \\  / | __ _ _ __   __ _  __ _  ___ _ __ ___   ___ _ __ | |_  | (___  _   _ ___| |_ ___ _ __ ___  
+    | |/ _ \\| '_ \\| '_ \\ / _` | __| |\\/| |/ _ \\| __| '_ \\  |  ___/ '__/ _ \\| |/ _ \\/ __| __| | |\\/| |/ _` | '_ \\ / _` |/ _` |/ _ \\ '_ ` _ \\ / _ \\ '_ \\| __|  \\___ \\| | | / __| __/ _ \\ '_ ` _ \\ 
+    | | (_) | |_) | | | | (_| | |_| |  | | (_) | |_| | | | | |   | | | (_) | |  __/ (__| |_  | |  | | (_| | | | | (_| | (_| |  __/ | | | | |  __/ | | | |_   ____) | |_| \\__ \\ ||  __/ | | | | |
+    |_|\\___/| .__/|_| |_|\\__,_|\\__|_|  |_|\\___/ \\__|_| |_| |_|   |_|  \\___/| |\\___|\\___|\\__| |_|  |_|\\__,_|_| |_|\\__,_|\\__, |\\___|_| |_| |_|\\___|_| |_|\\__| |_____/ \\__, |___/\\__\\___|_| |_| |_|
+            | |                                                           _/ |                                          __/ |                                        __/ |                      
+            |_|                                                          |__/                                          |___/                                        |___/                       ", "- --- .--. .... .- - -- --- - .... / .--. .-. --- .--- . -.-. - / -- .- -. .- --. . -- . -. - / ... -.-- ... - . --", "01010100 01101111 01110000 01101000 01100001 01110100 01001101 01101111 01110100 01101000 00100000 01010000 01110010 01101111 01101010 01100101 01100011 01110100 00100000 01001101 01100001 01101110 01100001 01100111 01100101 01101101 01100101 01101110 01110100 00100000 01010011 01111001 01110011 01110100 01100101 01101101", "As a project management system developed by TophatMoth, my purpose is to assist to the best of my abillities.
+I can help with project organization, visualization, information storage, and whatever else you can think of.", "Initializing productivity boosters...
+May the project management force be with you!
+(This message courtesy of ChatGPT)", "Strap on your project management hats and get ready for a wild ride!
+(This message courtesy of ChatGPT)", "Preparing to unleash organized chaos!
+Let the project management madness begin!
+(This message courtesy of ChatGPT)", "Time to project like a boss!
+(This message courtesy of ChatGPT)", "Break free from the shackles of order!
+Embrace the unpredictability of project management!
+(This message courtesy of ChatGPT and Boumbefr)", "In the realm of projects, chaos reigns supreme!
+(This message courtesy of ChatGPT and Boumbefr)", "Banana Socks!
+(This message courtesy of ChatGPT and Boumbefr)", "Chaos is your ally in project management.
+(This message courtesy of ChatGPT and Boumbefr)", "Abandon order and let chaos dance in harmony with your projects!
+(This message courtesy of ChatGPT and Boumbefr)", "99.99% Asbestos free!"])
+
+[node name="LoadDialog" type="FileDialog" parent="."]
+unique_name_in_owner = true
+title = "Select a Project"
+initial_position = 1
+size = Vector2i(700, 650)
+exclusive = false
+unresizable = true
+always_on_top = true
+ok_button_text = "Open"
+mode_overrides_title = false
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.tophatmoth")
+
+[node name="SaveDialog" type="FileDialog" parent="."]
+unique_name_in_owner = true
+title = "Select a Save Location"
+initial_position = 1
+size = Vector2i(700, 650)
+exclusive = false
+unresizable = true
+always_on_top = true
+ok_button_text = "Create Project"
+mode_overrides_title = false
+access = 2
+filters = PackedStringArray("*.tophatmoth")
 
 [node name="Grid" type="ParallaxBackground" parent="."]
 script = SubResource("GDScript_2annu")
@@ -349,5 +405,9 @@ autowrap_mode = 2
 script = SubResource("GDScript_7hn1t")
 text_file_path = "res://Fonts/Roboto_Mono/LICENSE.txt"
 
+[connection signal="file_selected" from="LoadDialog" to="." method="load_project"]
+[connection signal="file_selected" from="SaveDialog" to="." method="make_new_project"]
+[connection signal="pressed" from="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Button" to="SaveDialog" method="show"]
+[connection signal="pressed" from="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Button2" to="LoadDialog" method="show"]
 [connection signal="pressed" from="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/LicenseButtons/RobotoCredits" to="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/LicenseButtons/RobotoCredits/Popup" method="popup_centered_ratio" binds= [0.5]]
 [connection signal="about_to_popup" from="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/LicenseButtons/RobotoCredits/Popup" to="ColorRect/MarginContainer/ColorRect/MarginContainer/VBoxContainer/LicenseButtons/RobotoCredits/Popup/ScrollContainer" method="set_v_scroll" binds= [0]]

@@ -7,6 +7,7 @@
 script = ExtResource("2_brwje")
 
 [node name="TextEdit" type="TextEdit" parent="Content" index="0"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

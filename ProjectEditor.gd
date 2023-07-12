@@ -33,34 +33,41 @@ func _on_ui_button_pressed(button_id : int):
 			spawn_file_node(image_scene);
 
 func _ready():
-	load_project(Global.dir);
+	Global.proj_editor = self
+	load_project("",true);
 
-func load_project(new_dir:String):
-	%DirectoryLabel.text = new_dir;
+func _notification(what):
+	if what == NOTIFICATION_PREDELETE:
+		Global.proj_editor = null
+
+func load_project(new_dir_in_project:String,first_load:bool=false):
+	%DirectoryLabel.text = "/"+Global.dir_in_project;
 	
-	if Global.dir != "/":#Test for init
+	if Global.dir == "/":#Test for editor
+		return
+	if !first_load:
 		save_data()
+	
 	#Destroy Old
 	for filenode in %GraphEdit.get_children():
 		if filenode is FileNode:
 			filenode.queue_free()
 	graph_edit.scroll_offset = Vector2.ZERO;
 	
-	Global.dir = new_dir
-	if Global.dir == "/":
-		return;
+	Global.dir_in_project = new_dir_in_project
+
 	#Grab metadata
-	var metadata:Array[Dictionary] = []
+	var metadata:Array = []
 	if FileAccess.file_exists(Global.dir+"/metadata.json"):
 		var f:FileAccess = FileAccess.open(Global.dir+"/metadata.json",FileAccess.READ)
 		metadata = JSON.parse_string(f.get_as_text())
 	else:
-		#Emergency Catch, shouldn't be needed under normal operations
+		#Create blank metadata file if one doesn't exist
 		var f:FileAccess = FileAccess.open(Global.dir+"/metadata.json",FileAccess.WRITE)
 		f.store_string(JSON.stringify([],"\t"))
 	#Spawn FileNodes
 	for node_metadata in metadata:
-		# ADD LOAD CONNECTIONS FOR GRAPH
+		# ADD LOAD CONNECTIONS FOR GRAPH TODO
 		spawn_file_node(scene_dict[node_metadata["type"]],node_metadata)
 	return
 
@@ -70,8 +77,8 @@ func spawn_file_node(file_node_scene : PackedScene,metadata:Dictionary={}):
 	if new_fn is FileNode:
 		new_fn.position_offset = graph_edit.scroll_offset + (graph_edit.size * 0.5) - (new_fn.size * 0.5);
 		if metadata != {}:
-			new_fn.position_offset = metadata["position"]
-			new_fn.size = metadata["size"]
+			new_fn.position_offset = Vector2(metadata["position"][0],metadata["position"][1])
+			new_fn.size = Vector2(metadata["size"][0],metadata["size"][1])
 			new_fn.local_filename = metadata["filename"]
 			if new_fn is FolderNode:
 				new_fn.folder_set_title(metadata["title"])

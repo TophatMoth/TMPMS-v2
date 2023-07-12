@@ -16,12 +16,12 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 
-[node name="TextEdit" type="TextEdit" parent="Content/VBoxContainer" index="0"]
+[node name="LineEdit" type="LineEdit" parent="Content/VBoxContainer" index="0"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 text = "New Folder"
 placeholder_text = "Enter a title..."
-wrap_mode = 1
 
 [node name="Button" type="Button" parent="Content/VBoxContainer" index="1"]
 layout_mode = 2
@@ -37,3 +37,10 @@ grow_vertical = 2
 texture = ExtResource("2_tmku6")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="ConfirmDelete" parent="." index="1"]
+size = Vector2i(295, 156)
+dialog_text = "  Are you sure you want to
+   delete this file node?
+ (This will also delete all
+file nodes contained within)"

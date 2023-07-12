@@ -1,13 +1,17 @@
 extends FileNode
 class_name FolderNode
 
-func get_object_type():
+func get_data_type():
 	return "folder"
 
 func folder_get_title():
-	return $VBoxContainer/TextEdit.text
+	return %LineEdit.text
 
 func save_content():
+	if Global.dir == "/":
+		return
+	if local_filename == "":
+		find_valid_name()
 	return
 
 func get_dict() -> Dictionary:
@@ -16,13 +20,24 @@ func get_dict() -> Dictionary:
 	return ret_val;
 
 func load_content():
-	if Global.dir == "/":
-		return;
-	$VBoxContainer/TextEdit.text = local_filename.replace("/","")
 	return
 
+func recursive_delete(path:String):
+	var dir:DirAccess = DirAccess.open(path)
+	for f in dir.get_files():
+		dir.remove(f)
+	for d in dir.get_directories():
+		recursive_delete(path+d+'/')
+	DirAccess.remove_absolute(path)
+	return
+
+func delete_content():
+	if DirAccess.dir_exists_absolute(Global.dir+'/'+local_filename):
+		recursive_delete(Global.dir+'/'+local_filename)
+	
+
 func folder_set_title(string:String):
-	$VBoxContainer/TextEdit.text = string
+	%LineEdit.text = string
 	return
 
 func find_valid_name() -> void:
