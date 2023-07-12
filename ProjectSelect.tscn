@@ -31,6 +31,13 @@ func _ready():
 	# Applies the calculated sizes to the grid pattern and updates the motion_mirroring
 	motion_mirroring = max_dim;
 	$TextureRect.set_size(max_dim);
+	
+	# It breaks if you exit a project that had FileNodes >= 1
+	# Not sure why it breaks, but this fixes it
+	await get_tree().process_frame;
+	$TextureRect.stretch_mode = TextureRect.STRETCH_SCALE;
+	await get_tree().process_frame;
+	$TextureRect.stretch_mode = TextureRect.STRETCH_TILE;
 "
 
 [sub_resource type="GDScript" id="GDScript_qnhw8"]
