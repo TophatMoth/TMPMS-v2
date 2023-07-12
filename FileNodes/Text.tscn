@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://50ykg5mec0oh"]
+[gd_scene load_steps=3 format=3 uid="uid://50ykg5mec0oh"]
 
 [ext_resource type="PackedScene" uid="uid://d4bvvcabexaju" path="res://FileNodes/Base.tscn" id="1_1wdax"]
+[ext_resource type="Script" path="res://FileNodes/Text.gd" id="2_brwje"]
 
-[node name="Base" instance=ExtResource("1_1wdax")]
+[node name="Text" instance=ExtResource("1_1wdax")]
+script = ExtResource("2_brwje")
 
 [node name="TextEdit" type="TextEdit" parent="Content" index="0"]
 layout_mode = 1

@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://cnfiusjqg8q5b"]
+[gd_scene load_steps=4 format=3 uid="uid://cnfiusjqg8q5b"]
 
 [ext_resource type="PackedScene" uid="uid://d4bvvcabexaju" path="res://FileNodes/Base.tscn" id="1_7iyyw"]
 [ext_resource type="Texture2D" uid="uid://dfmgb4h78gvd5" path="res://ButtonIcons/CreateImage.png" id="2_hssnv"]
+[ext_resource type="Script" path="res://FileNodes/Image.gd" id="2_jhekp"]
 
-[node name="Base" instance=ExtResource("1_7iyyw")]
+[node name="Image" instance=ExtResource("1_7iyyw")]
+script = ExtResource("2_jhekp")
 
 [node name="TextureRect" type="TextureRect" parent="Content" index="0"]
 layout_mode = 1

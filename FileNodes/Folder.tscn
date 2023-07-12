@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://d2mk8sp2canj5"]
+[gd_scene load_steps=4 format=3 uid="uid://d2mk8sp2canj5"]
 
 [ext_resource type="PackedScene" uid="uid://d4bvvcabexaju" path="res://FileNodes/Base.tscn" id="1_4qqwn"]
+[ext_resource type="Script" path="res://FileNodes/Folder.gd" id="2_neasu"]
 [ext_resource type="Texture2D" uid="uid://dn2gimai8e2wm" path="res://ButtonIcons/Folder.png" id="2_tmku6"]
 
-[node name="Base" instance=ExtResource("1_4qqwn")]
+[node name="Folder" instance=ExtResource("1_4qqwn")]
+script = ExtResource("2_neasu")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Content" index="0"]
 layout_mode = 1
