@@ -49,3 +49,7 @@ func find_valid_name() -> void:
 	local_filename = "Folder"+str(num)+"/"
 	DirAccess.make_dir_absolute(Global.dir+"/"+local_filename)
 	return
+
+func _on_button_pressed():
+	Global.proj_editor.folder_display_name_stack.push_back(folder_get_title())
+	Global.proj_editor.load_project(Global.dir_in_project+'/'+local_filename.replace("/",""))

@@ -6,6 +6,8 @@ class_name ProjectEditor
 @onready var image_scene : PackedScene = preload("res://FileNodes/Image.tscn");
 @onready var scene_dict:Dictionary = {"text":textbox_scene,"folder":folder_scene,"image":image_scene}
 @onready var graph_edit : GraphEdit = %GraphEdit;
+var folder_display_name_stack:Array = []
+
 
 enum {
 	HOME, UP_FOLDER,
@@ -17,9 +19,12 @@ enum {
 func _on_ui_button_pressed(button_id : int):
 	match(button_id):
 		HOME:
-			print("Home Pressed");
+			folder_display_name_stack.clear()
+			load_project("")
 		UP_FOLDER:
-			print("Up Folder Pressed");
+			if Global.dir_in_project != "":
+				folder_display_name_stack.pop_back()
+				load_project(Global.dir_in_project.get_base_dir())
 		SAVE:
 			save_data();
 		CLOSE:
@@ -27,8 +32,10 @@ func _on_ui_button_pressed(button_id : int):
 			Global.change_scene("res://ProjectSelect.tscn");
 		ADD_TEXTBOX:
 			spawn_file_node(textbox_scene);
+			save_data()
 		ADD_FOLDER:
 			spawn_file_node(folder_scene);
+			save_data()
 		ADD_IMAGE:
 			spawn_file_node(image_scene);
 
@@ -41,8 +48,6 @@ func _notification(what):
 		Global.proj_editor = null
 
 func load_project(new_dir_in_project:String,first_load:bool=false):
-	%DirectoryLabel.text = "/"+Global.dir_in_project;
-	
 	if Global.dir == "/":#Test for editor
 		return
 	if !first_load:
@@ -55,6 +60,10 @@ func load_project(new_dir_in_project:String,first_load:bool=false):
 	graph_edit.scroll_offset = Vector2.ZERO;
 	
 	Global.dir_in_project = new_dir_in_project
+	
+	%DirectoryLabel.text = "/"
+	for folder in folder_display_name_stack:
+		%DirectoryLabel.text += folder + '/'
 
 	#Grab metadata
 	var metadata:Array = []
@@ -73,7 +82,6 @@ func load_project(new_dir_in_project:String,first_load:bool=false):
 
 func spawn_file_node(file_node_scene : PackedScene,metadata:Dictionary={}):
 	var new_fn := file_node_scene.instantiate();
-	graph_edit.add_child(new_fn);
 	if new_fn is FileNode:
 		new_fn.position_offset = graph_edit.scroll_offset + (graph_edit.size * 0.5) - (new_fn.size * 0.5);
 		if metadata != {}:
@@ -83,6 +91,8 @@ func spawn_file_node(file_node_scene : PackedScene,metadata:Dictionary={}):
 			if new_fn is FolderNode:
 				new_fn.folder_set_title(metadata["title"])
 			new_fn.load_content()
+	graph_edit.add_child(new_fn);
+
 
 func save_data():
 	if Global.dir == "/":

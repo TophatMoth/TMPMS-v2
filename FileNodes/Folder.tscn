@@ -44,3 +44,5 @@ dialog_text = "  Are you sure you want to
    delete this file node?
  (This will also delete all
 file nodes contained within)"
+
+[connection signal="pressed" from="Content/VBoxContainer/Button" to="." method="_on_button_pressed"]

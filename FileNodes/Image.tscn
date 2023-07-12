@@ -17,3 +17,19 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 texture = ExtResource("2_hssnv")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FileDialog" type="FileDialog" parent="." index="2"]
+title = "Open a File"
+initial_position = 1
+size = Vector2i(700, 650)
+unresizable = true
+always_on_top = true
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.bmp,*.dds,*.exr,*.hdr,*.jpg,*.jpeg,*.png,*.tga,*.svg,*.svgz,*.webp")
+
+[connection signal="canceled" from="FileDialog" to="." method="select_canceled"]
+[connection signal="file_selected" from="FileDialog" to="." method="image_selected"]

@@ -1,7 +1,7 @@
 extends GraphNode
 class_name FileNode
 
-var local_filename : String = "": #EX: Text1.txt, Image1.txt, Folder1/
+var local_filename : String = "": #EX: Text1.txt, Image1.png, Folder1/
 	set(value):
 		local_filename = value;
 		title = value;
